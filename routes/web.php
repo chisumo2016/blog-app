@@ -20,3 +20,8 @@ Route::get('post', function () {
 })->name('post');
 
 
+Route::get('admin/home', function () {
+    return view('admin.home');
+})->name('post');
+
+
