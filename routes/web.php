@@ -11,35 +11,33 @@
 |
 */
 
-Route::get('/', function () {
-    return view('user.blog');
+//User Routes
+Route::group(['namespace'=>'User'], function (){
+
+    Route::get('/', 'HomeController@index');
+
+    Route::get('post','PostController@index')->name('post');
 });
 
-Route::get('post', function () {
-    return view('user.post');
-})->name('post');
 
 
-Route::get('admin/home', function () {
-    return view('admin.home');
-})->name('post');
+/* Resourceful Route*/
+//Admin Route
+Route::group(['namespace'=>'Admin'],function (){
+    Route::get('admin/home','HomeController@index')->name('admin.home');
 
-Route::get('admin/home', function () {
-    return view('admin.home');
-})->name('post');
+    //Users Routes
+    Route::resource('admin/user','UserController');
 
-Route::get('admin/post', function () {
-    return view('admin.post.post');
-})->name('post');
+    //Post Routes
+    Route::resource('admin/post',  'PostController');
 
-Route::get('admin/tag', function () {
-    return view('admin.tag.tag');
-})->name('tag');
+    //Tag Routes
+    Route::resource('admin/tag',   'TagController');
 
-Route::get('admin/category', function () {
-    return view('admin.category.category');
-})->name('category');
-
+    //Category Routes
+    Route::resource('admin/category', 'CategoryController');
+});
 
 
 

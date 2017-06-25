@@ -27,10 +27,10 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="active treeview">
 
-            <li class=""><a href="{{ route('post') }}"><i class="fa fa-circle-o"></i> Post</a></li>
-            <li class=""><a href="{{ route('category') }}"><i class="fa fa-circle-o"></i> Categories</a></li>
-            <li class=""><a href=""{{ route('tag') }}><i class="fa fa-circle-o"></i> Tags</a></li>
-            <li class=""><a href="#"><i class="fa fa-circle-o"></i> Users</a></li>
+            <li class=""><a href="{{ route('post.index') }}"><i class="fa fa-circle-o"></i> Post</a></li>
+            <li class=""><a href="{{ route('category.index') }}"><i class="fa fa-circle-o"></i> Categories</a></li>
+            <li class=""><a href="{{ route('tag.index') }}"><i class="fa fa-circle-o"></i> Tags</a></li>
+            <li class=""><a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> Users</a></li>
 
             </li>
 
