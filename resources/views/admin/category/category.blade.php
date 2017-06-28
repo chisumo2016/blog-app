@@ -15,9 +15,13 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Titles</h3>
                         </div>
+
+                             @include('includes.errors.error')
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" action="{{ route('category.store') }}" method="post">
+
+                            {{ csrf_field() }}
                             <div class="box-body">
 
                                 <div class="col-lg-6 col-lg-offset-3">
@@ -33,6 +37,7 @@
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a type="button" href="{{ route('tag.index') }}" class="btn btn-warning">Back</a>
                                     </div>
                                 </div>
 

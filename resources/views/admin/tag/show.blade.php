@@ -1,5 +1,8 @@
 @extends('admin.layouts.app')
 
+@section('headSection')
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables/dataTables.bootstrap.css">') }}">
+    @endsection
 
 @section('main-content')
     <!-- Content Wrapper. Contains page content -->
@@ -23,7 +26,9 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Title</h3>
+                    <h3 class="box-title">Tags</h3>
+
+                    <a href="{{ route('tag.create') }}" class="col-lg-offset-6 btn btn-success">Add New</a>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -33,7 +38,49 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    Start creating your amazing application!
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Data Table With Full Features</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>S. No</th>
+                                    <th>Tag Name</th>
+                                    <th>Slug</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($tags as $tag)
+                                        <tr>
+                                            <td>{{ $loop->index+1 }}</td>
+                                            <td>{{ $tag->name }}</td>
+                                            <td>{{ $tag->slug }}</td>
+                                            <td><a href="{{ route('tag.edit',$tag->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
+
+                                            
+
+
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>S. No</th>
+                                    <th>Tag Name</th>
+                                    <th>Slug</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
@@ -47,4 +94,19 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+@endsection
+
+@section('footerSection')
+    <!-- DataTables -->
+    <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+
+    <!-- page script -->
+    <script>
+        $(function () {
+            $("#example1").DataTable();
+
+        });
+    </script>
+
 @endsection
