@@ -45,6 +45,7 @@
                             <th>Title </th>
                             <th>Sub Title</th>
                             <th>Slug</th>
+                            <th>Body</th>
                             <th>Created  At</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -57,7 +58,9 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->subtitle}}</td>
                                 <td>{{ $post->slug}}</td>
+                                <td>{{ $post->body}}</td>
                                 <td>{{ $post->created_at}}</td>
+
                                 <td><a href="{{ route('post.edit',$post->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
                                 <td>
                                     <form  id="delete-form-{{ $post->id }}" action="{{ route('post.destroy',$post->id) }}" method="post" >

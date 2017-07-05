@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\user\category;
+use App\Model\user\tag;
 use App\Model\user\post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +31,9 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('admin.post.post');
+        $tags = tag::all();
+        $categories = category::all();
+        return view('admin.post.post', compact('tags','categories'));
     }
 
     /**
@@ -54,8 +58,14 @@ class PostController extends Controller
         $post->subtitle = $request->subtitle;
         $post->slug     = $request->slug;
         $post->body     = $request->body;
+        $post->status   = $request->status;
 
         $post->save();
+        //Relation given between tags , category and post
+        $post->tags()->sync($request->tags);
+        $post->categories()->sync($request->categories);
+
+
 
 
         return redirect( route('post.index'));
@@ -84,8 +94,10 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $tags = tag::all();
+        $categories = category::all();
         $post = post::where('id',$id)->first();
-        return view('admin.post.edit',compact('post'));
+        return view('admin.post.edit',compact('post','tags','categories'));
     }
 
     /**
@@ -97,7 +109,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //return $request->all();
         //Validation
         $this->validate($request,[
             'title' => 'required',
@@ -112,6 +124,10 @@ class PostController extends Controller
         $post->subtitle = $request->subtitle;
         $post->slug     = $request->slug;
         $post->body     = $request->body;
+        $post->status   = $request->status;
+
+        $post->tags()->sync($request->tags);
+        $post->categories()->sync($request->categories);
 
         $post->save();
         return redirect( route('post.index'));
