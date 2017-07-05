@@ -57,7 +57,7 @@
 
                                         <div class="checkbox pull-left">
                                             <label>
-                                                <input type="checkbox" name="status" value="1" @if($post->status == 1)  {{ checked }} @endif>   Publish
+                                                <input type="checkbox" name="status" value="1" @if($post->status == 1)  {{ 'checked' }} @endif>   Publish
                                             </label>
                                         </div>
 
@@ -68,7 +68,14 @@
                                         <label>Select Tag</label>
                                         <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="tags[]">
                                             @foreach($tags as $tag)
-                                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                                <option value="{{ $tag->id }}"
+                                                   @foreach($post->tags as $postTag)
+                                                      @if($postTag->id == $tag->id)
+                                                           selected
+                                                        @endif
+                                                       @endforeach
+
+                                                >{{ $tag->name }}</option>
 
                                             @endforeach
 
@@ -78,7 +85,15 @@
                                             <label>Select Category</label>
                                             <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="categories[]">
                                                 @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}"
+
+                                                            @foreach($post->categories as $postCategory)
+                                                            @if($postCategory->id == $category->id)
+                                                            selected
+                                                            @endif
+                                                            @endforeach
+
+                                                    >{{ $category->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -107,7 +122,7 @@
                                 <!-- /.box-header -->
                                 <div class="box-body pad">
 
-                                    <textarea class="textarea" placeholder="Place some text here" name="body" id="body" style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $post->body }}</textarea>
+                                    <textarea class="textarea" placeholder="Place some text here" name="body" id="body" style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" >{{ $post->body }}</textarea>
 
                                 </div>
                             </div>
@@ -134,6 +149,8 @@
 @section('footerSection')
     <!-- Select2 -->
 <script src="{{ asset('admin/plugins/select2/select2.full.min.js') }}"></script>'}}">
+
+    <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 
     <script >
         $(document).ready(function(){

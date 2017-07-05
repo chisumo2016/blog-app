@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.3.8
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; <a href="http://almsaeedstudio.com">Bernard Chisumo</a>.</strong> All rights
     reserved.
 </footer>
 
@@ -18,6 +18,7 @@
 <script src="{{ asset('admin/bootstrap/js/bootstrap.min.js') }}"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
 <script src="{{ asset('admin/plugins/morris/morris.min.js') }}"></script>
 <!-- Sparkline -->
 <script src="{{ asset('admin/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
@@ -36,13 +37,19 @@
 <!-- Slimscroll -->
 <script src="{{ asset('admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <!-- FastClick -->
-<script src="{{ asset('') }}admin/plugins/fastclick/fastclick.js"></script>
+<script src="{{ asset('admin/plugins/fastclick/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('admin/dist/js/app.min.js') }}"></script>
+
+<!-- CK Editor -->
+
+
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{--<script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>--}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
+
 
 @section('footerSection')
 
