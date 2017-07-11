@@ -127,6 +127,18 @@
     <!-- Select2 -->
     <script src="{{ asset('admin/plugins/select2/select2.full.min.js') }}"></script>'}}">
 
+    <script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"> </script>
+
+    {{--<script>--}}
+        {{--$(function () {--}}
+            {{--// Replace the <textarea id="editor1"> with a CKEditor--}}
+            {{--// instance, using default configuration.--}}
+            {{--CKEDITOR.replace('editor1');--}}
+            {{--//bootstrap WYSIHTML5 - text editor--}}
+            {{--$(".textarea").wysihtml5();--}}
+        {{--});--}}
+    {{--</script>--}}
+
     <script >
         $(document).ready(function(){
             //Initialize Select2 Elements
@@ -135,13 +147,5 @@
     </script>
 
 
-    <script>
-    $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    CKEDITOR.replace('editor1');
-    //bootstrap WYSIHTML5 - text editor
-    $(".textarea").wysihtml5();
-    });
-    </script>
+
 @endsection
