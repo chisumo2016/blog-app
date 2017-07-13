@@ -46,3 +46,8 @@
 
 <!-- Theme JavaScript -->
 <script src="{{ asset('user/js/clean-blog.min.js') }}"></script>
+
+
+@section('footer')
+
+    @show

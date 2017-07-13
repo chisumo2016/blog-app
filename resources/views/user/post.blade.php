@@ -1,7 +1,11 @@
 @extends('user.app')
 
 
-@section('bg-img',asset('user/img/post-bg.jpg'))
+@section('bg-img',Storage::disk('local')->url($post->image))
+
+@section('head')
+    <link rel="stylesheet" href="{{ asset('user/css/prism.css') }}">
+@endsection
 
 @section('title', $post->title)
 
@@ -33,7 +37,7 @@
 
                         <small class="pull-right" style="margin-right: 20px;">
 
-                           {{ $category->name }}
+                            <a href="">{{ $category->name }}</a>
                         </small>
                        @endforeach
 
@@ -47,10 +51,9 @@
                     <h3>Tag Clouds </h3>
                     @foreach($post->tags as $tag)
 
-                        <small class="pull-left" style="margin-right: 20px; border-radius: 5px; border: 1px solid grey; padding: 5px;">
-
+                        <a href=""><small class="pull-left" style="margin-right: 20px; border-radius: 5px; border: 1px solid grey; padding: 5px;">
                             {{ $tag->name }}
-                        </small>
+                        </small></a>
                     @endforeach
                 </div>
 
@@ -63,4 +66,9 @@
 
     <hr>
 
+@endsection
+
+
+@section('footer')
+    <script src="{{ asset('user/js/prism.js') }}"></script>
 @endsection

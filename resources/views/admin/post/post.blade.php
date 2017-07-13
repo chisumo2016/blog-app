@@ -26,7 +26,7 @@
                                  @include('includes.errors.error')
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('post.store') }}" method="post">
+                        <form role="form" action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
 
                             {{ csrf_field() }}
                             <div class="box-body">
@@ -80,7 +80,7 @@
                                 </div>
                                 </div>
 
-                            </div>
+                        </form>
                             <!-- /.box-body -->
                             <div class="box">
                                 <div class="box-header">
@@ -104,17 +104,16 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                <a type="button" href="{{ route('post.index') }}" class="btn btn-warning">Back</a>
-                            </div>
-                        </form>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a type="button" href="{{ route('post.index') }}" class="btn btn-warning">Back</a>
+                        </div>
+                        </div>
                     </div>
                     <!-- /.box -->
 
                 </div>
                 <!-- /.col-->
-            </div>
             <!-- ./row -->
         </section>
         <!-- /.content -->
@@ -125,9 +124,9 @@
 
 @section('footerSection')
     <!-- Select2 -->
-    <script src="{{ asset('admin/plugins/select2/select2.full.min.js') }}"></script>'}}">
+    <script src="{{ asset('admin/plugins/select2/select2.full.min.js') }}"></script>
 
-    <script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"> </script>
+    <script src="{{ asset('admin/ckeditor/ckeditor.js') }}"> </script>
 
     {{--<script>--}}
         {{--$(function () {--}}
@@ -139,13 +138,12 @@
         {{--});--}}
     {{--</script>--}}
 
-    <script >
+    <script>
         $(document).ready(function(){
             //Initialize Select2 Elements
             $(".select2").select2();
         });
     </script>
 
-
-
+    
 @endsection

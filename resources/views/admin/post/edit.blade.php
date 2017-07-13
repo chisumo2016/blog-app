@@ -26,7 +26,7 @@
                     @include('includes.errors.error')
                     <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('post.update',$post->id) }}" method="post">
+                        <form role="form" action="{{ route('post.update',$post->id) }}" method="post" enctype="multipart/form-data">
 
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -67,6 +67,7 @@
                                     <div class="form-group" style="margin-top: 18px;">
                                         <label>Select Tag</label>
                                         <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="tags[]">
+
                                             @foreach($tags as $tag)
                                                 <option value="{{ $tag->id }}"
                                                    @foreach($post->tags as $postTag)
@@ -84,13 +85,14 @@
                                         <div class="form-group">
                                             <label>Select Category</label>
                                             <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true" name="categories[]">
+
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}"
 
                                                             @foreach($post->categories as $postCategory)
-                                                            @if($postCategory->id == $category->id)
+                                                             @if($postCategory->id == $category->id)
                                                             selected
-                                                            @endif
+                                                                @endif
                                                             @endforeach
 
                                                     >{{ $category->name }}</option>
@@ -148,17 +150,18 @@
 
 @section('footerSection')
     <!-- Select2 -->
-<script src="{{ asset('admin/plugins/select2/select2.full.min.js') }}"></script>'}}">
-    <script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"> </script>
+<script src="{{ asset('admin/plugins/select2/select2.full.min.js') }}"></script>}}">
+
+    <script src="{{ asset('admin/ckeditor/ckeditor.js') }}"> </script>
 
     <script>
-//        $(function () {
-//            // Replace the <textarea id="editor1"> with a CKEditor
-//            // instance, using default configuration.
-//            CKEDITOR.replace('editor1');
-//            //bootstrap WYSIHTML5 - text editor
-//            $(".textarea").wysihtml5();
-//        });
+        $(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('editor1');
+            //bootstrap WYSIHTML5 - text editor
+            $(".textarea").wysihtml5();
+        });
     </script>
 
     <script >

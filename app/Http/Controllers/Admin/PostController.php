@@ -50,26 +50,34 @@ class PostController extends Controller
              'subtitle' => 'required',
              'slug' => 'required',
              'body' => 'required',
+             'image' => 'required',
           ]);
 
-          // Connect to data
-        $post = new Post;
-        $post->title    = $request->title;
-        $post->subtitle = $request->subtitle;
-        $post->slug     = $request->slug;
-        $post->body     = $request->body;
-        $post->status   = $request->status;
+        //Upload the Image
+        if($request->hasFile('image')) {
+            $imageName = $request->image->store('public');
 
-        $post->save();
-        //Relation given between tags , category and post
-        $post->tags()->sync($request->tags);
-        $post->categories()->sync($request->categories);
+            // Connect to data
+            $post = new Post;
+
+            //Save the image  DB
+            $post->image = $imageName;
 
 
+            $post->title = $request->title;
+            $post->subtitle = $request->subtitle;
+            $post->slug = $request->slug;
+            $post->body = $request->body;
+            $post->status = $request->status;
+
+            $post->save();
+            //Relation given between tags , category and post
+            $post->tags()->sync($request->tags);
+            $post->categories()->sync($request->categories);
 
 
-        return redirect( route('post.index'));
-
+            return redirect(route('post.index'));
+        }
     }
 
     /**
@@ -116,10 +124,20 @@ class PostController extends Controller
             'subtitle' => 'required',
             'slug' => 'required',
             'body' => 'required',
+            'image' => 'required',
         ]);
+
+        //Upload the Image
+        if($request->hasFile('image')){
+            $imageName = $request->image->store('public');
+        }
 
         // Save to data
         $post = post::find($id);
+
+        $post->image =$imageName;
+
+
         $post->title    = $request->title;
         $post->subtitle = $request->subtitle;
         $post->slug     = $request->slug;
