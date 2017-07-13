@@ -80,7 +80,7 @@
                                 </div>
                                 </div>
 
-                        </form>
+
                             <!-- /.box-body -->
                             <div class="box">
                                 <div class="box-header">
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <!-- /.box -->
-
+                </form>
                 </div>
                 <!-- /.col-->
             <!-- ./row -->
@@ -128,15 +128,16 @@
 
     <script src="{{ asset('admin/ckeditor/ckeditor.js') }}"> </script>
 
-    {{--<script>--}}
-        {{--$(function () {--}}
-            {{--// Replace the <textarea id="editor1"> with a CKEditor--}}
-            {{--// instance, using default configuration.--}}
-            {{--CKEDITOR.replace('editor1');--}}
-            {{--//bootstrap WYSIHTML5 - text editor--}}
-            {{--$(".textarea").wysihtml5();--}}
-        {{--});--}}
-    {{--</script>--}}
+    <script>
+        $(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('editor1');
+            //bootstrap WYSIHTML5 - text editor
+            $(".textarea").wysihtml5();
+            CKEDITOR.replace('body');
+        });
+    </script>
 
     <script>
         $(document).ready(function(){
@@ -144,6 +145,8 @@
             $(".select2").select2();
         });
     </script>
+
+
 
     
 @endsection
