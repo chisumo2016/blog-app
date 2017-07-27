@@ -13,69 +13,68 @@
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Titles</h3>
+                            <h3 class="box-title">Add Admin</h3>
                         </div>
-                        <!-- /.box-header -->
+
+                    @include('includes.errors.error')
+                    <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" action="{{ route('user.store') }}" method="post">
+                            {{ csrf_field() }}
                             <div class="box-body">
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-lg-offset-3">
                                     <div class="form-group">
-                                        <label for="title">Post Title</label>
-                                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="subtitle">Post SubTitle</label>
-                                        <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Enter Sub Title">
+                                        <label for="name">  User Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="User Name">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="slug">Post Slug</label>
-                                        <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+                                        <label for="email">Email </label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                                     </div>
-                                </div>
 
-                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="image">Image</label>
-                                        <input type="file" name="image" id="exampleInputFile">
-
+                                        <label for="password">Password </label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                     </div>
-                                    <br><br>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="status">  Publish
-                                        </label>
+
+                                    <div class="form-group">
+                                        <label for="confirm_password">Confirm Password </label>
+                                        <input type="password" class="form-control" id="confirm_password" name="password" placeholder="Confirm Password">
+                                    </div>
+
+                                    {{--Assign Role--}}
+                                    <div class="form-group ">
+                                        <label>Assign Role</label>
+
+                                        <div class="row">
+                                            @foreach($roles as $role)
+
+                                                <div class="col-lg-3">
+                                                    <div class="checkbox">
+                                                        <label for=""><input type="checkbox" name="role[]" value="{{ $role->id }}"> {{ $role->role }}</label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+
+                                        {{--<select name="role" id="" class="form-control">--}}
+                                            {{--<option value="0">Editor</option>--}}
+                                            {{--<option value="1">Publisher</option>--}}
+                                            {{--<option value="3">Write</option>--}}
+                                        {{--</select>--}}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a type="button" href="{{ route('user.index') }}" class="btn btn-warning">Back</a>
                                     </div>
                                 </div>
 
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Write Pos Body Here
-                                        <small>Simple and fast</small>
-                                    </h3>
-                                    <!-- tools box -->
-                                    <div class="pull-right box-tools">
-                                        <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                            <i class="fa fa-minus"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                            <i class="fa fa-times"></i></button>
-                                    </div>
-                                    <!-- /. tools -->
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body pad">
-                                    <form>
-                                        <textarea class="textarea" placeholder="Place some text here" style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+
                         </form>
                     </div>
                     <!-- /.box -->
@@ -88,5 +87,4 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
 @endsection

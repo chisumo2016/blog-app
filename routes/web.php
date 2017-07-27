@@ -28,11 +28,14 @@ Route::group(['namespace'=>'User'], function (){
 
 /* Resourceful Route*/
 //Admin Route
-Route::group(['namespace'=>'Admin'],function (){
+Route::group(['namespace'=>'Admin'],function (){    //  ,'middleware'=>'auth:admin'
     Route::get('admin/home','HomeController@index')->name('admin.home');
 
     //Users Routes
     Route::resource('admin/user', 'UserController');
+
+    //Roles Routes
+    Route::resource('admin/role', 'RoleController');
 
     //Post Routes
     Route::resource('admin/post', 'PostController');

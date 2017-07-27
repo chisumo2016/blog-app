@@ -2,23 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Model\user\post;
-use App\Model\user\tag;
+use App\Model\admin\role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TagController extends Controller
+class RoleController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -27,9 +16,8 @@ class TagController extends Controller
     public function index()
     {
         //
-        $tags = tag::all();
-
-        return view('admin.tag.show',compact('tags'));
+        $roles = role::all();
+        return view('admin.role.show',compact('roles'));
     }
 
     /**
@@ -40,7 +28,10 @@ class TagController extends Controller
     public function create()
     {
         //
-        return view('admin.tag.tag');
+//        $roles = role::all();
+
+//        dd($roles);
+        return view('admin.role.create');
     }
 
     /**
@@ -52,18 +43,17 @@ class TagController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,[
-            'name' => 'required',
-            'slug'  => 'required'
+        $this->validate($request, [
+
+           'role'  => 'required|max:50|unique:roles'
         ]);
 
-        $tag = new Tag;
-        $tag->name = $request ->name;
-        $tag->slug = $request ->slug;
-        $tag->save();
+        $role = new role;
 
-        return redirect(route('tag.index'));
+        $role->role = $request->role;
+        $role->save();
 
+        return redirect(route('role.index'));
     }
 
     /**
@@ -86,8 +76,10 @@ class TagController extends Controller
     public function edit($id)
     {
         //
-        $tag = tag::where('id', $id)->first();
-        return view('admin.tag.edit', compact('tag'));
+
+        //$role = role::where('id', $id)->first();
+        $role = role::find($id);
+        return view('admin.role.edit', compact('role'));
     }
 
     /**
@@ -100,23 +92,22 @@ class TagController extends Controller
     public function update(Request $request, $id)
     {
         //
-
         //
-        $this->validate($request,[
-            'name' => 'required',
-            'slug'  => 'required'
+        $this->validate($request, [
+
+            'role'  => 'required|max:50'
         ]);
 
-        $tag = tag::find($id);
-        $tag->name = $request ->name;
-        $tag->slug = $request ->slug;
-        $tag->save();
+        $role = role::find($id);
+        $role->role = $request->role;
+        $role->save();
 
-        return redirect(route('tag.index'));
+        return redirect(route('role.index'));
+
 
     }
 
-    /**
+    /**r
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -125,7 +116,9 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
-        tag::where('id', $id)->delete();
-        return back();
+
+          role::where('id', $id)->delete();
+         return redirect()->back();
+
     }
 }

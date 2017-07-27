@@ -2,7 +2,7 @@
 
 @section('headSection')
     <link rel="stylesheet" href="{{ asset('admin/plugins/datatables/dataTables.bootstrap.css">') }}">
-@endsection
+    @endsection
 
 @section('main-content')
     <!-- Content Wrapper. Contains page content -->
@@ -26,9 +26,9 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Users</h3>
+                    <h3 class="box-title">Roles</h3>
 
-                    <a href="{{ route('user.create') }}" class="col-lg-offset-6 btn btn-success">Add New</a>
+                    <a href="{{ route('role.create') }}" class="col-lg-offset-6 btn btn-success">Add New</a>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -48,45 +48,47 @@
                                 <thead>
                                 <tr>
                                     <th>S. No</th>
-                                    <th>Tag Name</th>
+                                    <th>Role Name</th>
+
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
-                                    <tr>
-                                        <td>{{ $loop->index+1 }}</td>
-                                        <td>{{ $user->name }}</td>
+                                    @foreach($roles as $role)
+                                        <tr>
+                                            <td>{{ $loop->index+1 }}</td>
+                                            <td>{{ $role->role }}</td>
 
 
-                                        <td><a href="{{ route('user.edit',$user->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
-                                        <td>
+                                            <td><a href="{{ route('role.edit',$role->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                                            <td>
 
-                                            <form  id="delete-form-{{ $user->id }}" action="{{ route('tag.destroy',$user->id) }}" method="post" >
+                                                <form  id="delete-form-{{ $role->id }}" action="{{ route('tag.destroy',$role->id) }}" method="post" >
 
-                                                {{ csrf_field() }}
-                                                {{method_field('DELETE')}}
+                                                    {{ csrf_field() }}
+                                                    {{method_field('DELETE')}}
 
-                                                <a href="" onclick="
-                                                        if(confirm('Are you sure ,You Want to delete this ? '))
-                                                        {
-                                                        event.preventDefault();document.getElementById('delete-form-{{ $user->id }}').submit();
-                                                        }
-                                                        else{
-                                                        event.preventDefault()
-                                                        }"><span class="glyphicon glyphicon-trash"></span></a>
-                                            </form>
+                                                    <a href="" onclick="
+                                                            if(confirm('Are you sure ,You Want to delete this ? '))
+                                                            {
+                                                              event.preventDefault();document.getElementById('delete-form-{{ $role->id }}').submit();
+                                                            }
+                                                            else{
+                                                            event.preventDefault()
+                                                            }"><span class="glyphicon glyphicon-trash"></span></a>
+                                                </form>
 
-                                        </td>
+                                            </td>
 
-                                    </tr>
-                                @endforeach
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>S. No</th>
-                                    <th>Tag Name</th>
+                                    <th>Roleopn Name</th>
+
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
