@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\admin\Permission;
 use App\Model\admin\role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,10 +29,8 @@ class RoleController extends Controller
     public function create()
     {
         //
-//        $roles = role::all();
-
-//        dd($roles);
-        return view('admin.role.create');
+        $permissions = Permission::all();
+        return view('admin.role.create', compact('permissions'));
     }
 
     /**
@@ -103,8 +102,6 @@ class RoleController extends Controller
         $role->save();
 
         return redirect(route('role.index'));
-
-
     }
 
     /**r
@@ -115,10 +112,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
-
-          role::where('id', $id)->delete();
-         return redirect()->back();
+           //
+           role::where('id', $id)->delete();
+           return redirect()->back();
 
     }
 }

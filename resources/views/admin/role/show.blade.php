@@ -87,8 +87,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>S. No</th>
-                                    <th>Roleopn Name</th>
-
+                                    <th>Role Name</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
