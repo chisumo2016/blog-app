@@ -37,6 +37,9 @@ Route::group(['namespace'=>'Admin'],function (){    //  ,'middleware'=>'auth:adm
     //Roles Routes
     Route::resource('admin/role', 'RoleController');
 
+    //Permissio Routes
+    Route::resource('admin/permission', 'PermissionController');
+
     //Post Routes
     Route::resource('admin/post', 'PostController');
 
