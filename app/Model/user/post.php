@@ -2,6 +2,7 @@
 
 namespace App\Model\user;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class post extends Model
@@ -20,5 +21,10 @@ class post extends Model
     public  function  getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function  getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
     }
 }

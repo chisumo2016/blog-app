@@ -30,6 +30,102 @@
                                         <input type="text" class="form-control" id="role" name="role" placeholder="Role Title" value="{{ $role->role }}">
                                     </div>
 
+                                    <div class="row">
+
+                                        <div class="col-lg-4">
+                                            <label for="name">Posts Permission</label>
+
+                                            @foreach($permissions as $permission)
+                                                @if($permission->for == 'post')
+
+                                                    <div class="checkbox">
+                                                        <label for=""><input type="checkbox" name="permission[]" value="{{ $permission->id }}"
+
+                                                               @foreach($role->permissions as $role_permit)
+                                                                   @if($role_permit->id == $permission->id)
+                                                                             checked
+                                                                    @endif
+                                                               @endforeach
+                                                            >{{ $permission->name }}</label>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                        </div>
+
+                                        {{--USER SIDE PERMISSION--}}
+                                        <div class="col-lg-4">
+                                            <label for="name">Users Permission</label>
+                                            @foreach($permissions as $permission)
+                                                @if($permission->for == 'user')
+
+                                                    <div class="checkbox">
+                                                        <label for=""><input type="checkbox" name="permission[]" value="{{ $permission->id }}"
+                                                             @foreach($role->permissions as $role_permit)
+                                                                 @if($role_permit->id == $permission->id)
+                                                                             checked
+                                                                   @endif
+                                                              @endforeach
+
+
+                                                            >{{ $permission->name }}</label>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <label for="name">Other Permission</label>
+                                            @foreach($permissions as $permission)
+                                                @if($permission->for == 'other')
+
+                                                    <div class="checkbox">
+                                                        <label for=""><input type="checkbox" name="permission[]" value="{{ $permission->id }}"
+                                                                    @foreach($role->permissions as $role_permit)
+                                                                         @if($role_permit->id == $permission->id)
+                                                                                checked
+                                                                          @endif
+                                                                    @endforeach
+
+                                                            >{{ $permission->name }}</label>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="checkbox">--}}
+                                            {{--<label for=""><input type="checkbox">Create</label>--}}
+                                            {{--</div>--}}
+                                        </div>
+                                    </div>
+
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Submit</button>

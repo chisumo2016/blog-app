@@ -9,10 +9,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                Blank page
-                <small>it all starts here</small>
-            </h1>
+           @include('admin.layouts.pageHead')
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Examples</a></li>
@@ -27,8 +24,10 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Users</h3>
-
+                    
                     <a href="{{ route('user.create') }}" class="col-lg-offset-6 btn btn-success">Add New</a>
+
+                    @include('includes.messages.message')
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -48,7 +47,9 @@
                                 <thead>
                                 <tr>
                                     <th>S. No</th>
-                                    <th>Tag Name</th>
+                                    <th>User Name</th>
+                                    <th>Assign Role</th>
+                                    <th>Status</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -58,12 +59,19 @@
                                     <tr>
                                         <td>{{ $loop->index+1 }}</td>
                                         <td>{{ $user->name }}</td>
+                                        <td>
+                                            @foreach($user->roles as $role)
+                                               {{ $role->role }}
+                                             @endforeach
+                                        </td>
+
+                                        <td>{{ $user->status ? 'Active' : 'Not Active'}}</td>
 
 
                                         <td><a href="{{ route('user.edit',$user->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
                                         <td>
 
-                                            <form  id="delete-form-{{ $user->id }}" action="{{ route('tag.destroy',$user->id) }}" method="post" >
+                                            <form  id="delete-form-{{ $user->id }}" action="{{ route('user.destroy',$user->id) }}" method="post" >
 
                                                 {{ csrf_field() }}
                                                 {{method_field('DELETE')}}
@@ -86,7 +94,9 @@
                                 <tfoot>
                                 <tr>
                                     <th>S. No</th>
-                                    <th>Tag Name</th>
+                                    <th>User Name</th>
+                                    <th>Assign Roles</th>
+                                    <th>Status</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>

@@ -22,6 +22,11 @@ Route::group(['namespace'=>'User'], function (){
 
     Route::get('post/tag/{tag}','HomeController@tag')->name('tag');
     Route::get('post/category/{category}','HomeController@category')->name('category');
+
+
+    //VUE ROUTES
+
+    Route::post('getPosts', 'PostController@getAllPosts');
 });
 
 

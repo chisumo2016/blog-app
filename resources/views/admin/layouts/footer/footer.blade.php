@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.3.8
     </div>
-    <strong>Copyright &copy; <a href="http://almsaeedstudio.com">Bernard Chisumo</a>.</strong> All rights
+    <strong>Copyright &copy; : 2016-{{ Carbon\carbon::now()->year }}<a href="http://almsaeedstudio.com">Bernard Chisumo</a>.</strong> All rights
     reserved.
 </footer>
 

@@ -15,8 +15,30 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('posts', require('./components/posts.vue'));
+let url = window.location.href;
+let pageNumber = url.split('=')[1];
+//console.log(page);
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data:{   //Loops data=
+        blog :{}
+    },
+     mounted(){
+
+         axios.post('/getPosts',{
+             'page' :pageNumber
+         })
+
+             .then(response => {
+                 this.blog = response.data.data
+                 console.log(response);
+             })
+
+             .catch(function (error) {
+                 console.log(error);
+             });
+     }
+
 });

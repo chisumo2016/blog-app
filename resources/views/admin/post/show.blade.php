@@ -9,10 +9,8 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                Blank page
-                <small>it all starts here</small>
-            </h1>
+            @include('admin.layouts.pageHead')
+
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Examples</a></li>
@@ -26,9 +24,12 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Post</h3>
+                    <h3 class="box-title">Title</h3>
 
-                    <a href="{{ route('post.create') }}" class="col-lg-offset-6 btn btn-success">Add New</a>
+                        @can('post.create', Auth::user())
+                        <a href="{{ route('post.create') }}" class="col-lg-offset-6 btn btn-success">Add New</a>
+                         @endcan
+
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -47,8 +48,14 @@
                             <th>Slug</th>
                             <th>Body</th>
                             <th>Created  At</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            @can('posts.update', Auth::user())
+                                <th>Edit</th>
+                            @endcan
+
+                            @can('posts.delete', Auth::user())
+                                <th>Delete</th>
+                            @endcan
+
                         </tr>
                         </thead>
                         <tbody>
@@ -61,24 +68,33 @@
                                 <td>{{ $post->body}}</td>
                                 <td>{{ $post->created_at}}</td>
 
-                                <td><a href="{{ route('post.edit',$post->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
-                                <td>
-                                    <form  id="delete-form-{{ $post->id }}" action="{{ route('post.destroy',$post->id) }}" method="post" >
-                                        {{ csrf_field() }}
-                                        {{method_field('DELETE')}}
+                                {{--EDIT SECTION WITH GATE--}}
+                                @can('posts.update', Auth::user())
 
-                                        <a href="" onclick="
-                                                if(confirm('Are you sure ,You Want to delete this ? '))
-                                                {
+                                    <td><a href="{{ route('post.edit',$post->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                                @endcan
+
+                                {{--DELETE SECTION  WITH GATE --}}
+                                @can('posts.delete',Auth::user())
+
+                                    <td>
+                                        <form  id="delete-form-{{ $post->id }}" action="{{ route('post.destroy',$post->id) }}" method="post" >
+                                            {{ csrf_field() }}
+                                            {{method_field('DELETE')}}
+
+                                            <a href="" onclick="
+                                                    if(confirm('Are you sure ,You Want to delete this ? '))
+                                                    {
                                                     event.preventDefault();document.getElementById('delete-form-{{ $post->id }}').submit();
-                                                }
-                                                else{
+                                                    }
+                                                    else{
                                                     event.preventDefault()
-                                                }"><span class="glyphicon glyphicon-trash"></span></a>
-                                    </form>
+                                                    }"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </form>
 
 
-                                </td>
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                         </tbody>
@@ -88,9 +104,15 @@
                             <th>Title </th>
                             <th>Sub Title</th>
                             <th>Slug</th>
+                            <th>Body</th>
                             <th>Created  At</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            @can('posts.update', Auth::user())
+                                <th>Edit</th>
+                            @endcan
+
+                            @can('posts.delete', Auth::user())
+                                <th>Delete</th>
+                            @endcan
                         </tr>
                         </tfoot>
                     </table>

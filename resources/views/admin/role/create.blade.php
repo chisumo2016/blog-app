@@ -29,7 +29,6 @@
                                         <input type="text" class="form-control" id="role" name="role" placeholder="Role Title">
                                     </div>
                                     {{--POSTS SIDE PERMISSION--}}
-
                                     <div class="row">
 
                                         <div class="col-lg-4">
@@ -39,7 +38,7 @@
                                                 @if($permission->for == 'post')
 
                                                     <div class="checkbox">
-                                                        <label for=""><input type="checkbox" value="{{ $permission->id }}">{{ $permission->name }}</label>
+                                                        <label for=""><input type="checkbox" name="permission[]" value="{{ $permission->id }}">{{ $permission->name }}</label>
                                                     </div>
                                                 @endif
                                             @endforeach
@@ -61,7 +60,7 @@
                                                 @if($permission->for == 'user')
 
                                                     <div class="checkbox">
-                                                        <label for=""><input type="checkbox" value="{{ $permission->id }}">{{ $permission->name }}</label>
+                                                        <label for=""><input type="checkbox" name="permission[]" value="{{ $permission->id }}">{{ $permission->name }}</label>
                                                     </div>
                                                 @endif
                                             @endforeach
@@ -85,7 +84,7 @@
                                                 @if($permission->for == 'other')
 
                                                     <div class="checkbox">
-                                                        <label for=""><input type="checkbox" value="{{ $permission->id }}">{{ $permission->name }}</label>
+                                                        <label for=""><input type="checkbox" name="permission[]" value="{{ $permission->id }}">{{ $permission->name }}</label>
                                                     </div>
                                                 @endif
                                             @endforeach
@@ -103,6 +102,7 @@
                                             {{--</div>--}}
                                         </div>
                                     </div>
+
 
 
 

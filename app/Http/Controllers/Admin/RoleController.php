@@ -9,6 +9,17 @@ use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -52,6 +63,8 @@ class RoleController extends Controller
         $role->role = $request->role;
         $role->save();
 
+        //Relation save
+        $role->permissions()->sync($request->permission);
         return redirect(route('role.index'));
     }
 
@@ -78,7 +91,9 @@ class RoleController extends Controller
 
         //$role = role::where('id', $id)->first();
         $role = role::find($id);
-        return view('admin.role.edit', compact('role'));
+
+        $permissions = Permission::all();
+        return view('admin.role.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -92,6 +107,7 @@ class RoleController extends Controller
     {
         //
         //
+
         $this->validate($request, [
 
             'role'  => 'required|max:50'
@@ -100,6 +116,9 @@ class RoleController extends Controller
         $role = role::find($id);
         $role->role = $request->role;
         $role->save();
+
+        //Relation save
+        $role->permissions()->sync($request->permission);
 
         return redirect(route('role.index'));
     }
@@ -113,8 +132,8 @@ class RoleController extends Controller
     public function destroy($id)
     {
            //
-           role::where('id', $id)->delete();
-           return redirect()->back();
+        role::where('id',$id)->delete();
+        return redirect()->back();
 
     }
 }

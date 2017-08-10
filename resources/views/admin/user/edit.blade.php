@@ -13,46 +13,53 @@
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add Admin</h3>
+                            <h3 class="box-title">Update Admin</h3>
                         </div>
 
                     @include('includes.errors.error')
                     <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ route('user.store') }}" method="post">
+                        <form role="form" action="{{ route('user.update', $user->id) }}" method="post">
                             {{ csrf_field() }}
+
+                            {{ method_field('PUT') }}
                             <div class="box-body">
 
                                 <div class="col-lg-6 col-lg-offset-3">
                                     <div class="form-group">
                                         <label for="name">  User Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="User Name" value="{{ old('name') }}">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="User Name" value="@if (old('name')){{ old('name') }}@else{{ $user->name }}@endif  " >
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Email </label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="@if (old('email')){{ old('email') }}@else{{ $user->email }}@endif ">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="phone">Phone </label>
-                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ old('phone') }}">
+                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="@if (old('phone')){{ old('phone') }}@else{{ $user->phone }}@endif ">
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="password">Password </label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password"value="{{ old('password') }}" >
-                                    </div>
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="password">Password </label>--}}
+                                        {{--<input type="password" class="form-control" id="password" name="password" placeholder="Password"  value="@if (old('password')){{ old('password') }}@else{{ $user->password }}@endif ">--}}
+                                    {{--</div>--}}
 
-                                    <div class="form-group">
-                                        <label for="password_confirmation">Confirm Password </label>
-                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
-                                    </div>
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="password_confirmation">Confirm Password </label>--}}
+                                        {{--<input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">--}}
+                                    {{--</div>--}}
 
                                     <div class="form-group">
                                         <label for="Status">Status </label>
                                         <div class="checkbox">
-                                            <label for=""><input type="checkbox" name="status"  @if(old('status') == 1 )  checked  @endif  value="1"> Status</label>
+                                            <label for=""><input type="checkbox" name="status"
+
+                                            @if(old('status') == 1 || $user->status ==1)
+                                               checked
+                                            @endif
+                                           @if(old('status') == 1 )  checked  @endif  value="1"> Status</label>
                                         </div>
                                     </div>
 
@@ -67,7 +74,15 @@
 
                                                 <div class="col-lg-3">
                                                     <div class="checkbox">
-                                                        <label for=""><input type="checkbox" name="role[]" value="{{ $role->id }}"> {{ $role->role }}</label>
+                                                        <label for=""><input type="checkbox" name="role[]" value="{{ $role->id }}"
+                                                            @foreach( $user->roles as $user_role)
+                                                                @if($user_role->id == $role->id)
+                                                                      checked
+                                                                    @endif
+                                                                @endforeach
+
+
+                                                            > {{ $role->role }}</label>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -75,9 +90,9 @@
 
 
                                         {{--<select name="role" id="" class="form-control">--}}
-                                            {{--<option value="0">Editor</option>--}}
-                                            {{--<option value="1">Publisher</option>--}}
-                                            {{--<option value="3">Write</option>--}}
+                                        {{--<option value="0">Editor</option>--}}
+                                        {{--<option value="1">Publisher</option>--}}
+                                        {{--<option value="3">Write</option>--}}
                                         {{--</select>--}}
                                     </div>
 
