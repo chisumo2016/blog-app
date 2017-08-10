@@ -27,7 +27,7 @@ Route::group(['namespace'=>'User'], function (){
     //VUE ROUTES
 
     Route::post('getPosts', 'PostController@getAllPosts');
-    Route::post('saveLike', 'PostController@saveLike');
+    Route::post('saveLike', 'PostController@SaveLike');
 });
 
 

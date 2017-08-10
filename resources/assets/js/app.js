@@ -22,8 +22,9 @@ let pageNumber = url.split('=')[1];
 
 const app = new Vue({
     el: '#app',
+
     data:{   //Loops data=
-        blog :{}
+        blog:{}
     },
      mounted(){
 
@@ -33,7 +34,7 @@ const app = new Vue({
 
              .then(response => {
                  this.blog = response.data.data
-                 console.log(response);
+                 //console.log(response);
              })
 
              .catch(function (error) {

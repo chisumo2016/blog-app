@@ -27,6 +27,7 @@
                         :post-id    =    value.id
                         login       =    "{{ Auth::check() }}"
                         :likes       = value.likes.length
+                        :slug = value.slug
                         {{--:key=value:index--}}
                 ></posts>
 

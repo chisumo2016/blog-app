@@ -6,6 +6,7 @@ use App\Model\user\like;
 use App\Model\user\post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -25,12 +26,28 @@ class PostController extends Controller
     }
 
 
-    public function  saveLike(request $request)
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function  SaveLike(request $request)
     {
-        $like = new like;
-        $like->user_id = Auth::id();
-        $like->post_id = $request->id;
+        //Checked the user  == will get the value 1
 
-        $like->save();
+        $likecheck  = like::where(['user_id'=>Auth::id(),'post_id'=>$request->id])->first();
+
+        if($likecheck){
+
+            like::where(['user_id'=>Auth::id(),'post_id'=>$request->id])->delete();
+
+            return 'deleted';
+        }else{
+
+            $like = new like;
+            $like->user_id = Auth::id();
+            $like->post_id = $request->id;
+
+            $like->save();
+        }
     }
 }

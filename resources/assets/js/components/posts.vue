@@ -1,7 +1,7 @@
 <template>
     <div class="post-preview">
 
-        <a href="slug">
+        <a v-bind:href="slug">
             <h2 class="post-title">
 
                 {{ title }}
@@ -12,11 +12,14 @@
             </h3>
         </a>
 
-        <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> {{ created_at }}
+        <p class="post-meta">Posted by <a href="#">Bernard Chisumo</a> {{ created_at }}
 
             <a href=""  @clik.prevent="likeIt">
+
                 <small>{{ likeCount }}</small>
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+
+                <i class="fa fa-thumbs-up" v-if="likeCount == 0" aria-hidden="true"></i>
+                <i class="fa fa-thumbs-up" style="color: red" v-else="likesCount  > 0 " aria-hidden="true"></i>
             </a>
         </p>
 
@@ -30,13 +33,14 @@
                 likeCount:0
             }
         },
+
        props : [
-           'title','subtitle','created_at', 'postId','login', 'likes'
+           'title','subtitle','created_at', 'postId','login', 'likes','slug'
        ],
 
         created(){
-            
-            this.likeCount =this.likes
+
+            this.likeCount = this.likes
         },
 
         method: {
@@ -51,9 +55,14 @@
 
                         .then(response => {
                             //increament the likeCount
-                            this.likeCount +=1;
+                            if(response.data == 'deleted'){
+                                this.likeCount -=1;
+                            }else {
+                                this.likeCount +=1;
+                            }
+                           // this.likeCount +=1;
                         //this.blog = response.data.data
-                        console.log(response);
+                        //console.log(response);
                     })
 
                         .catch(function (error) {

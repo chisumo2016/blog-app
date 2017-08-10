@@ -792,6 +792,7 @@ var pageNumber = url.split('=')[1];
 
 var app = new Vue({
     el: '#app',
+
     data: { //Loops data=
         blog: {}
     },
@@ -802,7 +803,7 @@ var app = new Vue({
             'page': pageNumber
         }).then(function (response) {
             _this.blog = response.data.data;
-            console.log(response);
+            //console.log(response);
         }).catch(function (error) {
             console.log(error);
         });
@@ -1687,6 +1688,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -1695,7 +1699,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    props: ['title', 'subtitle', 'created_at', 'postId', 'login', 'likes'],
+
+    props: ['title', 'subtitle', 'created_at', 'postId', 'login', 'likes', 'slug'],
 
     created: function created() {
 
@@ -1713,9 +1718,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     id: this.postId
                 }).then(function (response) {
                     //increament the likeCount
-                    _this.likeCount += 1;
+                    if (response.data == 'deleted') {
+                        _this.likeCount -= 1;
+                    } else {
+                        _this.likeCount += 1;
+                    }
+                    // this.likeCount +=1;
                     //this.blog = response.data.data
-                    console.log(response);
+                    //console.log(response);
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -31809,7 +31819,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "post-preview"
   }, [_c('a', {
     attrs: {
-      "href": "slug"
+      "href": _vm.slug
     }
   }, [_c('h2', {
     staticClass: "post-title"
@@ -31821,7 +31831,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("Start Bootstrap")]), _vm._v(" " + _vm._s(_vm.created_at) + "\n\n        "), _c('a', {
+  }, [_vm._v("Bernard Chisumo")]), _vm._v(" " + _vm._s(_vm.created_at) + "\n\n        "), _c('a', {
     attrs: {
       "href": ""
     },
@@ -31831,8 +31841,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.likeIt($event)
       }
     }
-  }, [_c('small', [_vm._v(_vm._s(_vm.likeCount))]), _vm._v(" "), _c('i', {
+  }, [_c('small', [_vm._v(_vm._s(_vm.likeCount))]), _vm._v(" "), (_vm.likeCount == 0) ? _c('i', {
     staticClass: "fa fa-thumbs-up",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }) : _c('i', {
+    staticClass: "fa fa-thumbs-up",
+    staticStyle: {
+      "color": "red"
+    },
     attrs: {
       "aria-hidden": "true"
     }
