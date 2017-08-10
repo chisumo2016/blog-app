@@ -13,8 +13,9 @@
         </a>
 
         <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> {{ created_at }}
-            <a href="">
-                <small>0</small>
+
+            <a href=""  @clik.prevent="likeIt">
+                <small>{{ likeCount }}</small>
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
             </a>
         </p>
@@ -24,8 +25,44 @@
 
 <script>
     export default {
+        data(){
+            return{
+                likeCount:0
+            }
+        },
        props : [
-           'title' ,'subtitle','created_at'
-       ]
+           'title','subtitle','created_at', 'postId','login', 'likes'
+       ],
+
+        created(){
+            
+            this.likeCount =this.likes
+        },
+
+        method: {
+
+            likeIt(){
+                if(this.login){
+
+                    axios.post('/saveLike', {
+                        id : this.postId
+                    })
+
+
+                        .then(response => {
+                            //increament the likeCount
+                            this.likeCount +=1;
+                        //this.blog = response.data.data
+                        console.log(response);
+                    })
+
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }else {
+                    window.location ='login'
+                }
+            }
+        }
     }
 </script>

@@ -27,4 +27,9 @@ class post extends Model
     {
         return Carbon::parse($value)->diffForHumans();
     }
+
+    public  function  likes()
+    {
+        return $this->hasMany('App\Model\user\like');
+    }
 }

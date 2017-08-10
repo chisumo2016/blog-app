@@ -1686,9 +1686,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-   props: ['title', 'subtitle', 'created_at']
+    data: function data() {
+        return {
+            likeCount: 0
+        };
+    },
+
+    props: ['title', 'subtitle', 'created_at', 'postId', 'login', 'likes'],
+
+    created: function created() {
+
+        this.likeCount = this.likes;
+    },
+
+
+    method: {
+        likeIt: function likeIt() {
+            var _this = this;
+
+            if (this.login) {
+
+                axios.post('/saveLike', {
+                    id: this.postId
+                }).then(function (response) {
+                    //increament the likeCount
+                    _this.likeCount += 1;
+                    //this.blog = response.data.data
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                window.location = 'login';
+            }
+        }
+    }
 });
 
 /***/ }),
@@ -31786,19 +31821,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("Start Bootstrap")]), _vm._v(" " + _vm._s(_vm.created_at) + "\n        "), _vm._m(0)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
+  }, [_vm._v("Start Bootstrap")]), _vm._v(" " + _vm._s(_vm.created_at) + "\n\n        "), _c('a', {
     attrs: {
       "href": ""
+    },
+    on: {
+      "clik": function($event) {
+        $event.preventDefault();
+        _vm.likeIt($event)
+      }
     }
-  }, [_c('small', [_vm._v("0")]), _vm._v(" "), _c('i', {
+  }, [_c('small', [_vm._v(_vm._s(_vm.likeCount))]), _vm._v(" "), _c('i', {
     staticClass: "fa fa-thumbs-up",
     attrs: {
       "aria-hidden": "true"
     }
-  })])
-}]}
+  })])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

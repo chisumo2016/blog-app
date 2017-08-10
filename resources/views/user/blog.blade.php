@@ -20,10 +20,14 @@
                 {{--Using Vue--}}
                 <posts
                         v-for='value in blog'
-                        :title=value.title
-                        :subtitle=value.subtitle
-                        :created_at=value.created_at
-                        :key=value:index
+                        :title      =    value.title
+                        :subtitle   =    value.subtitle
+                        :created_at =    value.created_at
+                        :key        =    value.index
+                        :post-id    =    value.id
+                        login       =    "{{ Auth::check() }}"
+                        :likes       = value.likes.length
+                        {{--:key=value:index--}}
                 ></posts>
 
 
