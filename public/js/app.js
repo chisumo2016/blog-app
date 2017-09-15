@@ -791,23 +791,23 @@ var pageNumber = url.split('=')[1];
 //console.log(page);
 
 var app = new Vue({
-    el: '#app',
 
-    data: { //Loops data=
-        blog: {}
-    },
-    mounted: function mounted() {
-        var _this = this;
+  el: '#app',
+  data: {
+    blog: {}
+  },
+  mounted: function mounted() {
+    var _this = this;
 
-        axios.post('/getPosts', {
-            'page': pageNumber
-        }).then(function (response) {
-            _this.blog = response.data.data;
-            //console.log(response);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }
+    axios.post('/getPosts', {
+      'page': pageNumber
+    }).then(function (response) {
+      _this.blog = response.data.data;
+      // console.log(response);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
 });
 
 /***/ }),
@@ -1684,13 +1684,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -1699,33 +1692,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-
     props: ['title', 'subtitle', 'created_at', 'postId', 'login', 'likes', 'slug'],
-
     created: function created() {
-
         this.likeCount = this.likes;
     },
 
-
-    method: {
+    methods: {
         likeIt: function likeIt() {
             var _this = this;
 
             if (this.login) {
-
                 axios.post('/saveLike', {
                     id: this.postId
                 }).then(function (response) {
-                    //increament the likeCount
                     if (response.data == 'deleted') {
                         _this.likeCount -= 1;
                     } else {
                         _this.likeCount += 1;
                     }
-                    // this.likeCount +=1;
-                    //this.blog = response.data.data
-                    //console.log(response);
+                    // this.blog = response.data.data
+                    // console.log(response);
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -31823,7 +31809,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('h2', {
     staticClass: "post-title"
-  }, [_vm._v("\n\n            " + _vm._s(_vm.title) + "\n\n        ")]), _vm._v(" "), _c('h3', {
+  }, [_vm._v("\n            " + _vm._s(_vm.title) + "\n        ")]), _vm._v(" "), _c('h3', {
     staticClass: "post-subtitle"
   }, [_vm._v("\n            " + _vm._s(_vm.subtitle) + "\n        ")])]), _vm._v(" "), _c('p', {
     staticClass: "post-meta"
@@ -31831,12 +31817,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("Bernard Chisumo")]), _vm._v(" " + _vm._s(_vm.created_at) + "\n\n        "), _c('a', {
+  }, [_vm._v(" Bernard Chisumo ")]), _vm._v(" " + _vm._s(_vm.created_at) + "\n        "), _c('a', {
     attrs: {
       "href": ""
     },
     on: {
-      "clik": function($event) {
+      "click": function($event) {
         $event.preventDefault();
         _vm.likeIt($event)
       }

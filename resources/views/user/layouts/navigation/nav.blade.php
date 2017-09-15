@@ -6,23 +6,21 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="index.html">Clean Blog</a>
+            <a class="navbar-brand" href="{{ route('home') }}"> Chisumo Blog </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li>
-                    <a href="about.html">About</a>
+                    <a href={{ route('about') }}>About</a>
                 </li>
+
                 <li>
-                    <a href="post.html">Sample Post</a>
-                </li>
-                <li>
-                    <a href="contact.html">Contact</a>
+                    <a href="{{ route('contact') }}">Contact</a>
                 </li>
 
                 <li>

@@ -37,7 +37,7 @@ class PostController extends Controller
         $likecheck  = like::where(['user_id'=>Auth::id(),'post_id'=>$request->id])->first();
 
         if($likecheck){
-
+             //If it has value
             like::where(['user_id'=>Auth::id(),'post_id'=>$request->id])->delete();
 
             return 'deleted';

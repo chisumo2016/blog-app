@@ -28,6 +28,11 @@ Route::group(['namespace'=>'User'], function (){
 
     Route::post('getPosts', 'PostController@getAllPosts');
     Route::post('saveLike', 'PostController@SaveLike');
+
+
+    //Contact Page
+
+
 });
 
 
@@ -67,3 +72,9 @@ Route::group(['namespace'=>'Admin'],function (){    //  ,'middleware'=>'auth:adm
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/about', 'Page\PageController@about')->name('about');
+
+Route::get('/contact' , 'Page\PageController@contact')->name('contact');
+Route::post('/contact ','Page\PageController@postcontact');
